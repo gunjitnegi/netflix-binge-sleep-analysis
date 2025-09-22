@@ -1,0 +1,15 @@
+## **requirements.txt**
+
+pandas>=2.0.0
+numpy>=1.26.0
+matplotlib>=3.8.0
+seaborn>=0.12.0
+scikit-learn>=1.3.0
+
+> Notes:  
+> - Versions can be updated to the latest stable releases.  
+> - Add `plotly` or `streamlit` later if you extend the project with interactive dashboards.
+
+---
+# Data Analysis and Visualization Project
+This project involves data analysis and visualization using Python. The required libraries are listed in the `requirements.txt` file.
