@@ -30,14 +30,13 @@ df = df.dropna(subset=time_cols)
 for col in numeric_cols:
     df[col] = df[col].astype(float)
 
-# -----------------------------
+
 # Step 4: Remove duplicates
-# -----------------------------
+
 df = df.drop_duplicates()
 
-# -----------------------------
 # Step 5: Save cleaned data
-# -----------------------------
+
 df.to_csv('data/processed/netflix_sleep_cleaned.csv', index=False)
 print("Cleaned data saved to data/processed/netflix_sleep_cleaned.csv")
 print(f"Dropped rows logged to data/processed/dropped_rows_log.csv")
