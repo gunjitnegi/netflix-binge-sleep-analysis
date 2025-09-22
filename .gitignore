@@ -1,0 +1,11 @@
+# Python cache files
+__pycache__/
+*.pyc
+
+# Data folders
+data/raw/
+data/processed/
+
+# Environment files
+ds_env/
+.env
