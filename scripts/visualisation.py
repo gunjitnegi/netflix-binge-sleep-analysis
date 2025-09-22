@@ -1,5 +1,3 @@
-# dashboard_updated.py
-
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -8,9 +6,9 @@ import threading
 import time
 import os
 
-# -----------------------------
+
 # Step 1: Load feature-engineered data
-# -----------------------------
+
 df = pd.read_csv('data/processed/netflix_sleep_features.csv')
 
 # Convert datetime columns
@@ -18,16 +16,16 @@ df['Sleep Start Time'] = pd.to_datetime(df['Sleep Start Time'])
 df['Sleep End Time'] = pd.to_datetime(df['Sleep End Time'])
 df['Last Episode End Time'] = pd.to_datetime(df['Last Episode End Time'])
 
-# -----------------------------
+
 # Step 2: Descriptive statistics
-# -----------------------------
+
 avg_sleep_binge = df[df['Night_Binge']]['Total Sleep Duration (hrs)'].mean()
 avg_sleep_non_binge = df[~df['Night_Binge']]['Total Sleep Duration (hrs)'].mean()
 corr_matrix = df[['Total Sleep Duration (hrs)', 'Total Viewing Time (hrs)', 'Sleep_Score']].corr()
 
-# -----------------------------
+
 # Step 3: Scatter plot (interactive)
-# -----------------------------
+
 scatter_fig = px.scatter(
     df,
     x='Total Viewing Time (hrs)',
@@ -41,9 +39,8 @@ scatter_fig = px.scatter(
 scatter_fig.update_traces(marker=dict(size=12, opacity=0.7), selector=dict(mode='markers'))
 scatter_fig.update_layout(hovermode='closest')
 
-# -----------------------------
 # Step 4: Pie chart of Viewing Categories
-# -----------------------------
+
 pie_fig = px.pie(
     df,
     names='Viewing_Category',
@@ -52,9 +49,9 @@ pie_fig = px.pie(
     color_discrete_map={'Short':'#FFA07A', 'Medium':'#20B2AA', 'Long':'#9370DB'}
 )
 
-# -----------------------------
+
 # Step 5: Time series: Sleep duration & viewing time (more detailed)
-# -----------------------------
+
 df_sorted = df.sort_values('Sleep Start Time')
 time_series_fig = go.Figure()
 time_series_fig.add_trace(go.Scatter(
@@ -82,9 +79,9 @@ time_series_fig.update_layout(
     legend=dict(x=0.02, y=0.98)
 )
 
-# -----------------------------
+
 # Step 6: Dash App Layout
-# -----------------------------
+
 app = Dash(__name__)
 app.layout = html.Div(style={'backgroundColor':'#f9f9f9','padding':'10px'}, children=[
     html.H1("Netflix Binge & Sleep Analysis Dashboard", style={'textAlign':'center', 'color':'#333'}),
@@ -119,9 +116,9 @@ app.layout = html.Div(style={'backgroundColor':'#f9f9f9','padding':'10px'}, chil
     ], style={'marginTop':'30px'})
 ])
 
-# -----------------------------
+
 # Step 7: Run Dash App
-# -----------------------------
+
 def run_dash():
     app.run_server(debug=True)
 if __name__ == '__main__':
